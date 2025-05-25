@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer";
 import User from "@/models/userModel";
 import bcryptjs from "bcryptjs";
+import { Resend } from "resend";
 
 export const sendEmail = async ({ email, emailType, userId }: any) => {
   try {
@@ -19,20 +20,37 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
       });
     }
 
-    var transport = nodemailer.createTransport({
-      host: "sandbox.smtp.mailtrap.io",
-      port: 2525,
-      auth: {
-        user: process.env.MAIL_TRAP_USER,
-        pass: process.env.MAIL_TRAP_PASSWORD,
-      },
-    });
+    // var transport = nodemailer.createTransport({
+    //   host: "sandbox.smtp.mailtrap.io",
+    //   port: 2525,
+    //   auth: {
+    //     user: process.env.MAIL_TRAP_USER,
+    //     pass: process.env.MAIL_TRAP_PASSWORD,
+    //   },
+    // });
 
-    const mailOptions = {
-      from: "hitesh@gmail.com",
+    // const mailOptions = {
+    //   from: "hitesh@gmail.com",
+    //   to: email,
+    //   subject:
+    //     emailType === "VERIFY" ? "Verify your email" : "Reset your password",
+    // html: `<p>Click <a href="${
+    //   process.env.DOMAIN
+    // }/verifyemail?token=${hashedToken}">here</a> to ${
+    //   emailType === "VERIFY" ? "verify your email" : "reset your password"
+    // }
+    //       or copy and paste the link below in your browser. <br> ${
+    //         process.env.DOMAIN
+    //       }/verifyemail?token=${hashedToken}
+    //       </p>`,
+    // };
+
+    const resend = new Resend(process.env.RESEND_API_KEY);
+
+    const mailresponse = await resend.emails.send({
+      from: "onboarding@resend.dev",
       to: email,
-      subject:
-        emailType === "VERIFY" ? "Verify your email" : "Reset your password",
+      subject: "Verify your email",
       html: `<p>Click <a href="${
         process.env.DOMAIN
       }/verifyemail?token=${hashedToken}">here</a> to ${
@@ -42,9 +60,9 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
               process.env.DOMAIN
             }/verifyemail?token=${hashedToken}
             </p>`,
-    };
+    });
 
-    const mailresponse = await transport.sendMail(mailOptions);
+    // const mailresponse = await transport.sendMail(mailOptions);
     return mailresponse;
   } catch (error: any) {
     throw new Error(error.message);

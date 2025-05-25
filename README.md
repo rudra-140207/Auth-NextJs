@@ -1,45 +1,38 @@
-# A detailed course to undestand nextjs
+# 🔐 Full Stack Auth App with Next.js, MongoDB & Email Verification
 
-This long video was designed to give you an indepth understanding about latest nextjs and how it works. 
-
-## Tech Stack
-- Nextjs
-- typescript
-- mongodb
-- mailtrap
-
-![Course Image](./nextjs.png)
+A secure full-stack authentication application built using **Next.js 13+ App Router**, **MongoDB**, and **Resend** for sending **email verifications** and **password reset links**.
 
 ---
-Available on my youtube channel
-[Youtube channel link](https://www.youtube.com/@HiteshChoudharydotcom)
 
-## Getting Started
+## 📦 Features
 
-First, run the development server:
+- ✅ User Signup & Login
+- ✅ Email verification via Resend API
+- 🔒 Password hashing using `bcryptjs`
+- 🔐 JWT-based session handling (or NextAuth, depending on extension)
+- 🔁 Password reset with email link
+- 🗂️ MongoDB integration via Mongoose
+- 📨 API routes for login, signup, email verify, password reset
+- ✨ Clean and minimal UI using TailwindCSS
+
+---
+
+## 🛠 Tech Stack
+
+- **Frontend**: Next.js 13+ (App Router)
+- **Backend**: API Routes (app/api)
+- **Database**: MongoDB (Mongoose ODM)
+- **Email**: Resend API
+- **Styling**: TailwindCSS
+- **Security**: bcryptjs (for hashing), JWTs (if implemented)
+- **Environment**: Node.js
+
+---
+
+## 🔧 Getting Started
+
+### 1. Clone the Repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
-## Assignment
-1. Improve the UI of the application
-2. Add feature of forgot password
-
----
-### Hint:
-For forgot password feature.
-1. User needs a page to enter his email and submit.
-2. Validate if user exists, if yes, send him same token email that we discussed in this course
-3. User clicks on email and get a page to enter new password with a submit button.
-4. As soon as he click submit button, he is sending you a token and new password.
-5. Verify the token and save the new password after encrypting it.
-
----
-## your completed assignments
-
-- Add your repo link here
-- 
+git clone https://github.com/rudra-140207/Auth-NextJs
+cd Auth_NextJs
