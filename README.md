@@ -24,7 +24,7 @@ A secure full-stack authentication application built using **Next.js 13+ App Rou
 - **Database**: MongoDB (Mongoose ODM)
 - **Email**: Resend API
 - **Styling**: TailwindCSS
-- **Security**: bcryptjs (for hashing), JWTs (if implemented)
+- **Security**: bcryptjs (for hashing), JWTs
 - **Environment**: Node.js
 
 ---
