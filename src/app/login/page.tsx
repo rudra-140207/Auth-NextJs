@@ -110,6 +110,12 @@ export default function LoginPage() {
                 Sign up
               </Link>
             </p>
+            {/* <p className="text-center text-sm text-gray-600">
+              Forgot your password?
+              <Link href="/forgotpassword" className="underline text-blue-600">
+                Reset here
+              </Link>
+            </p> */}
           </CardContent>
         </Card>
       </div>
