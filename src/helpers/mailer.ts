@@ -26,6 +26,8 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
       },
     });
 
+    const route = emailType === "VERIFY" ? "verifyemail" : "resetpassword";
+
     const subject =
       emailType === "VERIFY" ? "Verify your email" : "Reset your password";
     const heading =
@@ -111,7 +113,7 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
             Please click the button below to ${actionText}.
           </p>
           <p style="text-align:center;">
-            <a href="${process.env.DOMAIN}/verifyemail?token=${hashedToken}" class="button" target="_blank" rel="noopener noreferrer">
+            <a href="${process.env.DOMAIN}/${route}?token=${hashedToken}" class="button" target="_blank" rel="noopener noreferrer">
               ${buttonText}
             </a>
           </p>
@@ -119,8 +121,8 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
             If the button above does not work, copy and paste the following link into your web browser:
           </p>
           <p class="link-text">
-            <a href="${process.env.DOMAIN}/verifyemail?token=${hashedToken}" target="_blank" rel="noopener noreferrer">
-              ${process.env.DOMAIN}/verifyemail?token=${hashedToken}
+            <a href="${process.env.DOMAIN}/${route}?token=${hashedToken}" target="_blank" rel="noopener noreferrer">
+              ${process.env.DOMAIN}/${route}?token=${hashedToken}
             </a>
           </p>
           <p class="footer">

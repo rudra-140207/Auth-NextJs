@@ -18,27 +18,24 @@ export default function resetPasswordPage() {
     "idle" | "loading" | "changed" | "error"
   >("idle");
 
-  const resetPassword = async () => {
-    setStatus("loading");
-    try {
-      await axios.post("/api/users/resetpassword", { token });
-      setStatus("changed");
-    } catch (error: any) {
-      setStatus("error");
-      console.error(error.response?.data || error.message);
-    }
-  };
 
-  const handlePasswordChange = () => {
+  const handlePasswordChange = (e : React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if(token.length === 0){
+        toast.error("Invalid token");
+        return
+    }
     if (password === confirmPassword) {
       setStatus("loading");
       axios
         .post("/api/users/resetpassword", { token, password })
         .then(() => {
           setStatus("changed");
+          toast.success("Password reset successfully");
         })
         .catch((error) => {
           setStatus("error");
+          toast.error("Failed to reset password");
           console.error(error.response?.data || error.message);
         });
     }else{
@@ -51,11 +48,6 @@ export default function resetPasswordPage() {
     if (urlToken) setToken(urlToken);
   }, []);
 
-  useEffect(() => {
-    if (token.length > 0) {
-      resetPassword();
-    }
-  }, [token]);
 
   return (
     <div
@@ -97,16 +89,16 @@ export default function resetPasswordPage() {
             {status === "loading" && (
               <div className="flex flex-col items-center space-y-2">
                 <Loader2 className="animate-spin h-8 w-8 text-blue-500" />
-                <p>Verifying your email...</p>
+                <p>Reseting Password...</p>
               </div>
             )}
 
             {status === "changed" && (
               <Alert className="bg-green-100 border-green-400">
                 <CheckCircle2 className="h-5 w-5 text-green-500" />
-                <AlertTitle>Email Verified!</AlertTitle>
+                <AlertTitle>Password Reset Successful</AlertTitle>
                 <AlertDescription>
-                  Your email has been successfully verified. You can now log in.
+                  You can now log in with your new password.
                 </AlertDescription>
                 <Button asChild className="mt-4 w-full">
                   <Link href="/login">Go to Login</Link>

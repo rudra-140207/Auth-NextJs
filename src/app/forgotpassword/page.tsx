@@ -26,13 +26,14 @@ export default function ForgotPassword() {
   const onSubmit = async () => {
     try {
       setLoading(true);
-      const response = await axios.post("/api/users/forgotpassword", email);
+      const response = await axios.post("/api/users/forgotpassword", { email });
       console.log("email send success", response.data);
       toast.success("Reset Password Link sent to your email");
       router.push("/login");
     } catch (error: any) {
-      console.log("email sending failed", error.message);
-      toast.error(error.message);
+      console.log("email sending failed", error);
+      const message = error.response?.data?.error || "Something went wrong";
+      toast.error(message);
     } finally {
       setLoading(false);
     }
@@ -50,9 +51,7 @@ export default function ForgotPassword() {
       {/* Left Side Content */}
       <div className="hidden md:flex flex-col justify-center w-1/2 px-10 text-white ">
         <h1 className="text-4xl font-bold mb-4">Welcome to Auth App</h1>
-        <p className="text-lg">
-          Empower your experience.
-        </p>
+        <p className="text-lg">Empower your experience.</p>
       </div>
 
       {/* Right Side Card */}
@@ -65,7 +64,6 @@ export default function ForgotPassword() {
           </CardHeader>
 
           <CardContent className="space-y-4">
-
             <div>
               <Label htmlFor="email">Email</Label>
               <Input
@@ -76,7 +74,6 @@ export default function ForgotPassword() {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-
           </CardContent>
 
           <CardFooter className="flex flex-col gap-3">
