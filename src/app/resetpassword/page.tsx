@@ -10,7 +10,7 @@ import { Loader2, CheckCircle2, XCircle } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { toast } from "react-hot-toast";
 
-export default function resetPasswordPage() {
+export default function ResetPasswordPage() {
   const [token, setToken] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");

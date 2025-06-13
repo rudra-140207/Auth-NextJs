@@ -31,9 +31,12 @@ export default function VerifyEmailPage() {
   }, []);
 
   useEffect(() => {
-    if (token.length > 0) {
-      verifyUserEmail();
-    }
+    const runVerification = async () => {
+      if (token.length > 0) {
+        await verifyUserEmail();
+      }
+    };
+    runVerification();
   }, [token]);
 
   return (
